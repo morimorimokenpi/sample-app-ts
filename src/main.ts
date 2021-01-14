@@ -8,7 +8,7 @@ Vue.config.productionTip = false;
 Vue.use(VueCompositionAPI);
 
 new Vue({
-  router,
+  router, // VueRouterのインスタンスを、Vueのインスタンス化時のオプションに指定することで、this.$routerでVue Routerのインスタンスにアクセスできる。
   store,
   render: h => h(App),
 }).$mount('#app');
