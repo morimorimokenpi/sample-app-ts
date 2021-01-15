@@ -3,12 +3,18 @@ import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
 import VueCompositionAPI from '@vue/composition-api';
+import vuetify from '@/plugins/vuetify';
+import 'roboto-fontface/css/roboto/roboto-fontface.css';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 Vue.config.productionTip = false;
 Vue.use(VueCompositionAPI);
 
 new Vue({
-  router, // VueRouterのインスタンスを、Vueのインスタンス化時のオプションに指定することで、this.$routerでVue Routerのインスタンスにアクセスできる。
+  // VueRouterのインスタンスを、Vueのインスタンス化時のオプションに指定することで、this.$routerでVue Routerのインスタンスにアクセスできる。
+  router,
+
   store,
+  vuetify,
   render: h => h(App),
 }).$mount('#app');
