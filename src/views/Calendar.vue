@@ -9,6 +9,9 @@
           <v-btn fab text small color="grey darken-2" @click="prev">
             <v-icon small>chevron_left</v-icon>
           </v-btn>
+          <v-btn fab text small color="grey darken-2" @click="next">
+            <v-icon small>chevron_right</v-icon>
+          </v-btn>
           <v-toolbar-title v-text="title" />
         </v-toolbar>
       </v-sheet>
