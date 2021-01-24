@@ -1,7 +1,11 @@
+import '@/plugins/composition-api';
+import { reactive } from '@vue/composition-api';
 import {
   CalendarEventDetail,
   CalendarEventTodayDetail,
+  NewCalendarEvent,
 } from '@/store/calendar-event.model';
+import { profileStore } from '@/store/profile';
 
 export const calendarEventMockData: CalendarEventDetail[] = [
   {
@@ -35,7 +39,7 @@ export const calendarEventMockData: CalendarEventDetail[] = [
     id: 'd5be8374-b82e-4417-99ad-bde160b85b71',
     userId: '2ec8d984-aa5f-4f7e-b1a8-c9e478b54ffe',
     name: '音楽発表会',
-    start: '2020-03-030 9:00',
+    start: '2020-03-03 9:00',
     end: '2020-03-03 12:00',
     memo: null,
     shared: true,
@@ -107,3 +111,48 @@ export const todayCalendarEventMockData: CalendarEventTodayDetail[] = [
     shared: true,
   },
 ];
+
+export const calendarEventStore = reactive({
+  calendarEvents: calendarEventMockData,
+});
+
+const generateUuidMock = () => {
+  return 'a8b2c7c8-ebe4-4c70-a1d0-xxxxxxxxxxxx'.replace(/x/g, () =>
+    Math.floor(Math.random() * 16).toString(16),
+  );
+};
+
+/**
+ * カレンダーイベントを追加します。
+ * @param newCalendarEvent 追加するカレンダイベント
+ */
+export const add = (newCalendarEvent: NewCalendarEvent) => {
+  newCalendarEvent.id = generateUuidMock();
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  newCalendarEvent.userId = profileStore.profile!.userId;
+  calendarEventStore.calendarEvents.push(
+    newCalendarEvent as CalendarEventDetail,
+  );
+};
+
+/**
+ * カレンダーイベントを更新します。
+ * @param newCalendarEvent 更新するカレンダイベント
+ */
+export const update = (newCalendarEvent: NewCalendarEvent) => {
+  const index = calendarEventStore.calendarEvents.findIndex(
+    event => event.id === newCalendarEvent.id,
+  );
+
+  if (index === -1) {
+    // 更新対象が見つからなかった場合
+    return;
+  }
+
+  // https://jp.vuejs.org/v2/guide/list/html#配列の変化を検出
+  calendarEventStore.calendarEvents.splice(
+    index,
+    1,
+    newCalendarEvent as CalendarEventDetail,
+  );
+};

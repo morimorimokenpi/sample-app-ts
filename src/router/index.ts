@@ -43,7 +43,7 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
-    path: 'sign-in',
+    path: '/sign-in',
     name: 'sign-in',
     component: SignInComponent,
     meta: {
