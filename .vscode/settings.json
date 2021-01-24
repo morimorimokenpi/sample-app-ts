@@ -9,7 +9,7 @@
   "html.validate.styles": false,
 
   // FormatterをESLint(Prettier)にする
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -21,7 +21,7 @@
   },
 
   // codeActionsOnSaveとの競合を避ける
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
 
   // ファイル保存時にESLint/stylelintを実行するための設定
   "editor.codeActionsOnSaveTimeout": 2000,
